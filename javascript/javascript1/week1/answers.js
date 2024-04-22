@@ -114,9 +114,11 @@ const secondWords = [
   "Ventures",
 ];
 
-const randomNumber = Math.floor(Math.random() * 10);
+const randomNumber1 = Math.floor(Math.random() * 10);
+const randomNumber2 = Math.floor(Math.random() * 10);
 
-const startupName = firstWords[randomNumber] + " " + secondWords[randomNumber];
+const startupName =
+  firstWords[randomNumber1] + " " + secondWords[randomNumber2];
 const nameLength = startupName.length - 1;
 
 console.log(
