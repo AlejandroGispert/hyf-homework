@@ -49,25 +49,39 @@ console.log(`Your dog will be ${dogYear} ${years} old in ${dogYearFuture}`);
 //Housey pricey (A house price estimator)
 //************************************************
 
-//names are now in camelCase, and numbers in array
-/** @type {array} */
-const peterDimensions = [8, 10, 10];
-/** @type {array} */
-const juliaDimensions = [5, 11, 8];
+//added arrow function with implicit return
+const volumeCalculator = (length, width, depth) => length * width * depth;
 
-const volumeInMetersPeter =
-  peterDimensions[0] * peterDimensions[1] * peterDimensions[2];
-const volumeInMetersJulia =
-  juliaDimensions[0] * juliaDimensions[1] * juliaDimensions[2];
-
+const volumeInMetersPeter = volumeCalculator(8, 10, 10);
+const volumeInMetersJulia = volumeCalculator(5, 11, 8);
 const gardenSizeInM2Peter = 100;
 const gardenSizeInM2Julia = 70;
 
-const correctHousePricePeter =
-  volumeInMetersPeter * 2.5 * 1000 + gardenSizeInM2Peter * 300;
-const correctHousePriceJulia =
-  volumeInMetersJulia * 2.5 * 1000 + gardenSizeInM2Julia * 300;
+//added explicit return arrow function
+const rightHousePriceCalculator = (volume, garden) => {
+  return volume * 2.5 * 1000 + garden * 300;
+};
 
+const realHouseCostPeter = rightHousePriceCalculator(
+  volumeInMetersPeter,
+  gardenSizeInM2Peter
+);
+const realHouseCostJulia = rightHousePriceCalculator(
+  volumeInMetersJulia,
+  gardenSizeInM2Julia
+);
+
+//added some ternary logic inside the function
+const compareHousePrice = (realPrice, houseCurrentPrice) => {
+  return realPrice > houseCurrentPrice
+    ? "its a good offer."
+    : "its a bad offer.";
+};
+
+const convenienceForPeter = compareHousePrice(realHouseCostPeter, 2500000);
+const convenienceForJulia = compareHousePrice(realHouseCostPeter, 1000000);
+console.log("For Peter, buying that house " + convenienceForPeter);
+console.log("For Julia, buying that house " + convenienceForJulia);
 /*
 function numberWithPunctum(num) {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -75,20 +89,20 @@ function numberWithPunctum(num) {
 */
 
 //used "toFixed", but it only adds after the decimals,so i found another logic to make it work, instead of regex
-const houseConvenienceForPeter =
-  "Peter is considering a house for 2.500.000 but the correct price of that house is: " +
-  (correctHousePricePeter / 1000000).toFixed(3) +
-  ".000";
-const houseConvenienceForJulia =
-  "Julia is considering a house for 1.000.000 but the correct price of that house is: " +
-  (correctHousePriceJulia / 1000000).toFixed(3) +
-  ".000";
+// const houseConvenienceForPeter =
+//   "Peter is considering a house for 2.500.000 but the correct price of that house is: " +
+//   (correctHousePricePeter / 1000000).toFixed(3) +
+//   ".000";
+// const houseConvenienceForJulia =
+//   "Julia is considering a house for 1.000.000 but the correct price of that house is: " +
+//   (correctHousePriceJulia / 1000000).toFixed(3) +
+//   ".000";
 
-console.log(houseConvenienceForPeter);
-console.log(houseConvenienceForJulia);
-
+// console.log(houseConvenienceForPeter);
+// console.log(houseConvenienceForJulia);
+//************************************************************ */
 // Ez Namey (Startup name generator) Optional
-
+//************************************************************ */
 const firstWords = [
   "Point",
   "Scality",
