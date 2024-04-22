@@ -12,7 +12,9 @@ https://www.freecodecamp.org/AlejandroGispert
 //Age-ify (A future age calculator)
 //************************************************
 
+//added some JSdoc
 /**
+ * defining the years
  * @param {number} yearOfBirth its actually my birthYear
  * @param {number} yearFuture its a year i choose
 
@@ -28,7 +30,8 @@ console.log("You will be " + age + " years old in " + yearFuture);
 //Goodboy-Oldboy (A dog age calculator)
 //************************************************
 
-const dogYearOfBirth = 2010;
+//corrected the years nitty-picky
+const dogYearOfBirth = 2017;
 const dogYearFuture = 2045;
 let dogYear = dogYearFuture - dogYearOfBirth;
 const shouldShowResultInDogYears = true;
@@ -36,16 +39,17 @@ let years = "human years";
 
 if (shouldShowResultInDogYears) {
   years = "dog years";
-  dogYear *= 5;
+  //corrected years
+  dogYear *= 7;
 }
-console.log(
-  "Your dog will be " + dogYear + " " + years + " old in " + dogYearFuture
-);
+//changed to template literals
+console.log(`Your dog will be ${dogYear} ${years} old in ${dogYearFuture}`);
 
 //************************************************
 //Housey pricey (A house price estimator)
 //************************************************
 
+//names are now in camelCase, and numbers in array
 /** @type {array} */
 const peterDimensions = [8, 10, 10];
 /** @type {array} */
@@ -70,17 +74,18 @@ function numberWithPunctum(num) {
 }
 */
 
-const result =
+//used "toFixed", but it only adds after the decimals,so i found another logic to make it work, instead of regex
+const houseConvenienceForPeter =
   "Peter is considering a house for 2.500.000 but the correct price of that house is: " +
   (correctHousePricePeter / 1000000).toFixed(3) +
   ".000";
-const result2 =
+const houseConvenienceForJulia =
   "Julia is considering a house for 1.000.000 but the correct price of that house is: " +
   (correctHousePriceJulia / 1000000).toFixed(3) +
   ".000";
 
-console.log(result);
-console.log(result2);
+console.log(houseConvenienceForPeter);
+console.log(houseConvenienceForJulia);
 
 // Ez Namey (Startup name generator) Optional
 
