@@ -2,22 +2,40 @@
 
 const boughtCandyPrices = [];
 
-const addCandy = (candyType, weight) => {
-  candyType.toLowerCase();
+//old logic That works perfectly
+// const addCandy = (candyType, weight) => {
+//   candyType.toLowerCase();
 
-  switch (candyType) {
-    case (candyType = "sweet"):
-      boughtCandyPrices.push(weight * 0.5);
-      break;
-    case (candyType = "chocolate"):
-      boughtCandyPrices.push(weight * 0.7);
-      break;
-    case (candyType = "toffee"):
-      boughtCandyPrices.push(weight * 1.1);
-      break;
-    case (candyType = "chewing-gum"):
-      boughtCandyPrices.push(weight * 0.03);
-      break;
+//   switch (candyType) {
+//     case (candyType = "sweet"):
+//       boughtCandyPrices.push(weight * 0.5);
+//       break;
+//     case (candyType = "chocolate"):
+//       boughtCandyPrices.push(weight * 0.7);
+//       break;
+//     case (candyType = "toffee"):
+//       boughtCandyPrices.push(weight * 1.1);
+//       break;
+//     case (candyType = "chewing-gum"):
+//       boughtCandyPrices.push(weight * 0.03);
+//       break;
+//   }
+// };
+
+//new and improved logic
+const candyPriceList = {
+  sweet: 0.5,
+  chocolate: 0.7,
+  toffee: 1.1,
+  "chewing-gum": 0.03,
+};
+
+const addCandy = (candyType, weight) => {
+  for (let candy in candyPriceList) {
+    if (candy === candyType) {
+      boughtCandyPrices.push(weight * candyPriceList[candy]);
+      break; // Exit the loop once the matching type is found
+    }
   }
 };
 
@@ -29,15 +47,11 @@ addCandy("sweet", 20);
 const amountToSpend = Math.random() * 100;
 
 const canBuyMoreCandy = () => {
-  let sum = 0;
-
   const sumOfArray = boughtCandyPrices.reduce((a, b) => a + b, 0);
-  //console.log(sumOfArray);
-  if (amountToSpend >= sumOfArray) {
-    console.log("You can buy more, so please do!");
-  } else {
-    console.log("Enough candy for you!");
-  }
+
+  return amountToSpend >= sumOfArray
+    ? console.log("You can buy more, so please do!")
+    : console.log("Enough candy for you!");
 };
 
 console.log(amountToSpend);
