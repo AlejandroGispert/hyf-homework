@@ -2,7 +2,6 @@
 
 const class07Students = [];
 function addStudentToClass(studentName) {
-  // You write code here
   if (studentName === "") {
     console.log("insert a valid name");
   } else if (class07Students.length > 5 && studentName != "Queen") {
@@ -15,7 +14,6 @@ function addStudentToClass(studentName) {
 }
 
 function getNumberOfStudents() {
-  // You write code here
   return class07Students.length;
 }
 
@@ -28,5 +26,6 @@ addStudentToClass("theodor");
 addStudentToClass("pål");
 addStudentToClass("pele");
 addStudentToClass("Queen");
-console.log(class07Students);
+
+console.log(getNumberOfStudents());
 getNumberOfStudents();
