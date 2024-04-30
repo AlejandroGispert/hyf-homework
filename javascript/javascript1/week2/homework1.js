@@ -1,15 +1,13 @@
 // Flight booking fullname function
-const getFullname = (firstname, surname, useFormalName) => {
-  if (useFormalName) {
-    return "Lord " + firstname + " " + surname;
-  } else {
-    return firstname + " " + surname;
-  }
+const getFullName = (firstName, surName, useFormalName) => {
+  return useFormalName
+    ? `Lord ${firstName} ${surName}`
+    : `${firstName} ${surName}`;
 };
 
-getFullname("Benjamin", "Hughes"); // returns "Benjamin Hughes"
+getFullName("Benjamin", "Hughes"); // returns "Benjamin Hughes"
 
-const fullname1 = getFullname("Pepe", "Cuba", false);
-const fullname2 = getFullname("Loco", "Rodriguez", true);
+const fullName1 = getFullName("Pepe", "Cuba", false);
+const fullName2 = getFullName("Loco", "Rodriguez", true);
 
-console.log("fullname1: " + fullname1 + " fullname2: " + fullname2);
+console.log(`fullName1: ${fullName1}; fullName2: ${fullName2}`);
