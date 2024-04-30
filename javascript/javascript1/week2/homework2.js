@@ -12,22 +12,31 @@ const weekday = [
 
 const date = new Date();
 
+// MY OLD LOGIC THAT WORKS PERFECTLY
+// const getEventWeekday = (num) => {
+//   if (num > 8) {
+//     let restingWeeks = num - 7;
+//     //console.log("restingWeeks " + restingWeeks);
+//     return getEventWeekday(restingWeeks);
+//   } else if (num <= 7 && num > 0) {
+//     let day = weekday[date.getDay() + num];
+//     // console.log("passed " + day);
+//     return day;
+//   } else if (num === 0) {
+//     let day = weekday[date.getDay()];
+//     console.log("today is: " + day);
+//     return day;
+//   } else {
+//     console.log("failed");
+//   }
+// };
+
+// NEW LOGIC THAT ALSO WORKS PERFECTLY, but its more appropiate
+
 const getEventWeekday = (num) => {
-  if (num > 8) {
-    let restingWeeks = num - 7;
-    //console.log("restingWeeks " + restingWeeks);
-    return getEventWeekday(restingWeeks);
-  } else if (num <= 7 && num > 0) {
-    let day = weekday[date.getDay() + num];
-    // console.log("passed " + day);
-    return day;
-  } else if (num === 0) {
-    let day = weekday[date.getDay()];
-    console.log("today is: " + day);
-    return day;
-  } else {
-    console.log("failed");
-  }
+  const currentDay = date.getDay();
+  const futureDay = (currentDay + num) % 7;
+  return weekday[futureDay];
 };
 
 // With todays weekday a tuesday
