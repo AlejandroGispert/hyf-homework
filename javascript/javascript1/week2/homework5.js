@@ -30,13 +30,21 @@ const candyPriceList = {
   "chewing-gum": 0.03,
 };
 
+// const addCandy = (candyType, weight) => {
+//   for (let candy in candyPriceList) {
+//     if (candy === candyType) {
+//       boughtCandyPrices.push(weight * candyPriceList[candy]);
+//       break;
+//     }
+//   }
+// };
+//IMPROVED LOGIC TO LOOK INSIDE AN OBJECT
 const addCandy = (candyType, weight) => {
-  for (let candy in candyPriceList) {
-    if (candy === candyType) {
-      boughtCandyPrices.push(weight * candyPriceList[candy]);
-      break; // Exit the loop once the matching type is found
-    }
-  }
+  Object.entries(candyPriceList).find(([value]) =>
+    value === candyType
+      ? boughtCandyPrices.push(weight * candyPriceList[value])
+      : ""
+  );
 };
 
 addCandy("toffee", 20);
@@ -47,6 +55,7 @@ addCandy("sweet", 20);
 const amountToSpend = Math.random() * 100;
 
 const canBuyMoreCandy = () => {
+  //LOGIC TO LOOK INSIDE AN ARRAY
   const sumOfArray = boughtCandyPrices.reduce((a, b) => a + b, 0);
 
   return amountToSpend >= sumOfArray
