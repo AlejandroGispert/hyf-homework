@@ -3,14 +3,13 @@
 
 // The saveNote function should push an object to the notes array with the keys content and id.
 
+const notes = [];
 /**
  *
  *
  * @param {string} content
  * @param {number} id
  */
-
-const notes = [];
 
 function saveNote(content, id) {
   notes.push({
