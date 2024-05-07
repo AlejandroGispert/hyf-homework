@@ -92,20 +92,26 @@ const seriesDurations = [
 ];
 
 function logOutSeriesText() {
-  let titles = "";
-  let totalHours = 0;
-  const eightyYearsInHours = 701265.022;
+  //refactored
+  const averageLifeInYears = 80;
+
+  //to calculate average days in a year, including leap years
+  const yearAverageDays = (3 * 365 + 366) / 4;
+  const eightyYearsInHours = averageLifeInYears * yearAverageDays * 24;
+  const eightyYearsInMinutes = eightyYearsInHours * 60;
+
   let countOfTimePercent = 0;
   let result = [];
   let total = 0;
 
-  for (let i = 0; i < seriesDurations.length; i++) {
-    titles = seriesDurations[i].title;
+  //value to pass in all toFixed
+  const toFixedValue = 3;
 
-    totalHours =
-      seriesDurations[i].days * 24 +
-      seriesDurations[i].hours +
-      seriesDurations[i].minutes / 60;
+  for (let i = 0; i < seriesDurations.length; i++) {
+    // Destructuring here
+    const { title, days, hours, minutes } = seriesDurations[i];
+
+    let totalHours = days * 24 + hours + minutes / 60;
 
     let percent = (totalHours / eightyYearsInHours) * 100;
 
@@ -113,11 +119,12 @@ function logOutSeriesText() {
 
     total += (countOfTimePercent / eightyYearsInHours) * 100;
 
-    result.push(`${titles} took ${percent.toFixed(3)} of my life`);
+    result.push(`${title} took ${percent.toFixed(toFixedValue)}% of my life`);
   }
 
   return (
-    result.join("\n") + `\nIn total that is ${total.toFixed(3)} of my life`
+    result.join("\n") +
+    `\nIn total that is ${total.toFixed(toFixedValue)}% of my life`
   );
 }
 
