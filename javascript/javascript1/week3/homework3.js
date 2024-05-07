@@ -101,7 +101,7 @@ function logOutSeriesText() {
   const eightyYearsInMinutes = eightyYearsInHours * 60;
 
   let countOfTimePercent = 0;
-  let result = [];
+
   let total = 0;
 
   //value to pass in all toFixed
@@ -119,11 +119,10 @@ function logOutSeriesText() {
 
     total += (countOfTimePercent / eightyYearsInHours) * 100;
 
-    result.push(`${title} took ${percent.toFixed(toFixedValue)}% of my life`);
+    console.log(`${title} took ${percent.toFixed(toFixedValue)}% of my life`);
   }
 
-  return (
-    result.join("\n") +
+  return console.log(
     `\nIn total that is ${total.toFixed(toFixedValue)}% of my life`
   );
 }
