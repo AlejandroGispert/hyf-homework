@@ -18,7 +18,7 @@ const addActivity = (date, activity, duration) => {
   });
 };
 addActivity("23/7-18", "Youtube", 30);
-
+addActivity("23/7-18", "TikTok", 10);
 // Show my status
 
 // This function should use the activities variable and return
@@ -51,16 +51,19 @@ showStatus(activities);
 // Usage limit
 
 // Improved addActivity, so that we dont need to specify the date,
-const date = new Date();
-const options = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-};
-const dateToday = date.toLocaleDateString("en-EN", options);
+
 // function automatically figures out what the date is.
 const addActivityWithDate = (activity, duration) => {
+  //added date inside function
+  const date = new Date();
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const dateToday = date.toLocaleDateString("en-EN", options);
+
   activities.push({
     date: dateToday,
     activity: activity,
@@ -79,6 +82,15 @@ console.log(activities);
 const usageLimit2 = 60;
 
 const showStatus2 = (arr) => {
+  const date = new Date();
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const dateToday = date.toLocaleDateString("en-EN", options);
+
   let minutesOfUsage = 0;
   const todaysActivities = [];
 
@@ -110,8 +122,7 @@ showStatus2(activities);
 
 // Create a function for calculating the activity a user has spent the most time on.
 const findTheLongestActivity = () => {
-  allActivityArray = [];
-  let longestActivity = "";
+  const allActivityArray = [];
 
   for (let i = 0; i < activities.length; i++) {
     allActivityArray.push(activities[i].duration);
@@ -120,13 +131,12 @@ const findTheLongestActivity = () => {
 
   for (let i = 0; i < activities.length; i++) {
     if (activities[i].duration === longestActivityDuration) {
-      longestActivity = activities[i].activity;
+      return console.log(
+        "the activity a user has spent the most time on is: " +
+          activities[i].activity
+      );
     }
   }
-
-  return console.log(
-    "the activity a user has spent the most time on is: " + longestActivity
-  );
 };
 console.log("\x1b[35m%s\x1b[0m", "\nLongest activity - calculator");
 findTheLongestActivity();
