@@ -12,13 +12,14 @@ const activities = [];
  */
 const addActivity = (date, activity, duration) => {
   activities.push({
-    date: date,
-    activity: activity,
-    duration: duration,
+    date,
+    activity,
+    duration,
   });
 };
 addActivity("23/7-18", "Youtube", 30);
 addActivity("23/7-18", "TikTok", 10);
+addActivity("23/7-18", "TikTok", 5);
 // Show my status
 
 // This function should use the activities variable and return
