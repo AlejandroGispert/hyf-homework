@@ -1,4 +1,10 @@
-//Voice assistant
+import "./styles.scss";
+
+// Or if installed from NPM to use with a bundler
+import Artyom from "artyom.js";
+// const artyom = require("artyom.js");
+const artyom = new Artyom();
+
 let catchedName = "";
 const catchedToDo = [];
 const eightBallAnswers = [
@@ -56,15 +62,15 @@ const getReply = (command) => {
   //case 3
   else if (
     command.toLowerCase().includes("add") &&
-    command.toLowerCase().includes("todo")
+    command.toLowerCase().includes("to-do")
   ) {
     for (let i = 0; i < splittedArray.length; i++) {
       if (splittedArray[i].toLowerCase() === "add") {
         if (!catchedToDo.includes(splittedArray[i + 1])) {
           catchedToDo.push(splittedArray[i + 1]);
-          response += `Added ${splittedArray[i + 1]} to our TODO list\n`;
+          response += `Added ${splittedArray[i + 1]} to our to-do list\n`;
         } else {
-          response = `That item is already in our TODO list`;
+          response = `That item is already in our to-do list`;
         }
       }
     }
@@ -73,17 +79,17 @@ const getReply = (command) => {
   //case 4 remove
   else if (
     command.toLowerCase().includes("remove") &&
-    command.toLowerCase().includes("todo")
+    command.toLowerCase().includes("to-do")
   ) {
     for (let i = 0; i < splittedArray.length; i++) {
       if (splittedArray[i].toLowerCase() === "remove") {
         if (!catchedToDo.includes(splittedArray[i + 1])) {
-          response = `Item ${splittedArray[i + 1]} is not in our TODO list`;
+          response = `Item ${splittedArray[i + 1]} is not in our to-do list`;
         } else {
           console.log(catchedToDo);
           let indexToRemove = catchedToDo.indexOf(splittedArray[i + 1]);
           catchedToDo.splice(indexToRemove, 1);
-          response += `Removed ${splittedArray[i + 1]} from our TODO list\n`;
+          response += `Removed ${splittedArray[i + 1]} from our to-do list\n`;
           console.log(catchedToDo);
         }
       }
@@ -92,12 +98,12 @@ const getReply = (command) => {
 
   //case 5  Whats on my todo
   else if (
-    (command.toLowerCase().includes("whats on") ||
+    (command.toLowerCase().includes("what is on") ||
       command.toLowerCase().includes("what's on")) &&
     (command.toLowerCase().includes("todo") ||
-      command.toLowerCase().includes("todo?"))
+      command.toLowerCase().includes("to-do"))
   ) {
-    response += `these are the items on the todo: \n`;
+    response += `these are the items on our to-do list: \n`;
     catchedToDo.map((e) => (response += `${e}\n`));
   }
 
@@ -135,7 +141,15 @@ const getReply = (command) => {
             response =
               Number(splittedArray[i + 2]) + Number(splittedArray[i + 4]);
             break;
+          case "plus":
+            response =
+              Number(splittedArray[i + 2]) + Number(splittedArray[i + 4]);
+            break;
           case "-":
+            response =
+              Number(splittedArray[i + 2]) - Number(splittedArray[i + 4]);
+            break;
+          case "minus":
             response =
               Number(splittedArray[i + 2]) - Number(splittedArray[i + 4]);
             break;
@@ -143,7 +157,15 @@ const getReply = (command) => {
             response =
               Number(splittedArray[i + 2]) * Number(splittedArray[i + 4]);
             break;
+          case "times":
+            response =
+              Number(splittedArray[i + 2]) * Number(splittedArray[i + 4]);
+            break;
           case "/":
+            response =
+              Number(splittedArray[i + 2]) / Number(splittedArray[i + 4]);
+            break;
+          case "slash":
             response =
               Number(splittedArray[i + 2]) / Number(splittedArray[i + 4]);
             break;
@@ -152,24 +174,23 @@ const getReply = (command) => {
     }
   }
   //case6 set a timer
-  else if (command.toLowerCase().includes("set a timer")) {
+  else if (
+    command.toLowerCase().includes("set") ||
+    command.toLowerCase().includes("timer")
+  ) {
     for (let i = 0; i < splittedArray.length; i++) {
-      if (
-        splittedArray[i].toLowerCase().includes("for") &&
-        splittedArray[i].toLowerCase().includes("minutes")
-      ) {
-        response = `Timer set for ${splittedArray[i + 1]} minutes`;
-
+      if (splittedArray[i].toLowerCase().includes("for")) {
+        if (
+          splittedArray[i].toLowerCase().includes("1") ||
+          splittedArray[i].toLowerCase().includes("one")
+        ) {
+          response = `Timer set for ${splittedArray[i + 1]} minut`;
+        } else {
+          response = `Timer set for ${splittedArray[i + 1]} minutes`;
+        }
         const milliseconds = Number(splittedArray[i + 1]) * 60 * 1000;
         const print = () => (response = "Timer done");
         setTimeout(print, milliseconds);
-        //setInterval
-      } else if (
-        !splittedArray[i].toLowerCase().includes("for") &&
-        !splittedArray[i].toLowerCase().includes("minutes")
-      ) {
-        response =
-          "Please give some minutes value by saying: Set a timer for x minutes.";
       }
     }
   }
@@ -180,22 +201,60 @@ const getReply = (command) => {
       eightBallAnswers[Math.floor(Math.random() * eightBallAnswers.length)];
   }
   //final return
-  return response;
+  return response.toString();
 };
-//console.log(getReply("hello, my name is Bob"));
 
-//console.log(getReply("what is my name"));
+function isgetReplyAvailable() {
+  return typeof getReply !== "undefined" && typeof getReply === "function";
+}
 
-// console.log(
-//   getReply("Add fishing to my todo and add shopping and add cooking")
-// );
+if (isgetReplyAvailable()) {
+  let command;
+  let timeoutId;
+  let setIntervalTimer;
 
-//console.log(getReply("Add fishing to my todo")); // "fishing added to your todo"
-//console.log(getReply("Remove fishing from my todo"));
-//console.log(getReply("What's on my todo?"));
-console.log(getReply("what day is today"));
+  const button = document.querySelector("button");
+  button.addEventListener("click", () => {
+    button.innerHTML = "Talk now 🙂";
+    setIntervalTimer = setInterval(() => {
+      const randomNumber = Math.floor(Math.random() * 6) + 2;
+      if (randomNumber % 2 === 0) {
+        button.innerHTML = "Talk now 😮";
+      } else {
+        button.innerHTML = "Talk now 🙂";
+      }
+    }, 100);
+    clearTimeout(timeoutId);
 
-//console.log(getReply("what is 3 + 3"));
-//console.log(getReply("what is 4 * 4"));
-console.log(getReply("Set a timer "));
-//console.log(getReply("what do you want of me"));
+    command = "";
+    timeoutId = setTimeout(() => {
+      clearInterval(setIntervalTimer);
+      const response = getReply(command);
+      console.log(response);
+      artyom.say(response);
+
+      button.innerHTML = "Give a new command";
+    }, 5000);
+  });
+
+  var UserDictation = artyom.newDictation({
+    continuous: false, // Enable continuous if HTTPS connection
+    onResult: function (text) {
+      // Do something with the text
+      if (text.length > command.length) {
+        command = text;
+        console.log(command);
+      }
+    },
+    onStart: function () {
+      console.log("Dictations started by the users");
+    },
+    onEnd: function () {
+      console.log("Dictation stopped by the user");
+    },
+  });
+
+  UserDictation.start();
+} else {
+  alert("no getReply function detected");
+}
