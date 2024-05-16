@@ -7,14 +7,12 @@
 const fib = (num) => {
   let fibonacciArray = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34];
 
-  let i = 1;
+  let i = 2; //i tool so long to deliver the homework because of this number.
   while (i < num) {
     // Apply basic Fibonacci formulae
     fibonacciArray[i] = fibonacciArray[i - 1] + fibonacciArray[i - 2];
 
-    // Increment the conditional variable
     i++;
-    console.log(fibonacciArray);
   }
 
   return fibonacciArray[num - 1];
@@ -22,5 +20,5 @@ const fib = (num) => {
 
 console.log(fib(10));
 
-fib(5); // 3
+console.log(fib(5)); // 3
 fib(10); // 34
