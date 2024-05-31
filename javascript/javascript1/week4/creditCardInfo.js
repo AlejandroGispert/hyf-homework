@@ -7,27 +7,27 @@ const getCardInfo = (cardNumber) => {
   //or BIN, Bank Identification Number
   //   const issuerIdentificationNumber = cardNumber.toString().slice(0, 6);
   //   const lastDigit = cardNumber.toString().slice(-1);
-
-  const firstDigit = cardNumber.toString().slice(0, 1);
-  const firstTwoDigits = cardNumber.toString().slice(0, 2);
+  const cardNumberStr = cardNumber.toString();
+  const firstDigit = cardNumberStr.slice(0, 1);
+  const firstTwoDigits = cardNumberStr.slice(0, 2);
 
   switch (true) {
-    case firstDigit == 4 &&
-      cardNumber.toString().length >= 13 &&
-      cardNumber.toString().length <= 16:
+    case parseInt(firstDigit) === 4 &&
+      cardNumberStr.length >= 13 &&
+      cardNumberStr.length <= 16:
       cardType = "Visa";
 
       break;
-    case firstDigit == 5 && cardNumber.toString().length === 16:
+    case parseInt(firstDigit) === 5 && cardNumberStr.length === 16:
       cardType = "Mastercard";
 
       break;
-    case (firstTwoDigits == 34 || firstTwoDigits == 37) &&
-      cardNumber.toString().length == 15:
+    case (parseInt(firstTwoDigits) === 34 || firstTwoDigits == 37) &&
+      cardNumberStr.length == 15:
       cardType = "American Express";
 
       break;
-    case firstDigit == 6 && cardNumber.toString().length == 16:
+    case parseInt(firstDigit) === 6 && cardNumberStr.length == 16:
       cardType = "Discover";
 
       break;
