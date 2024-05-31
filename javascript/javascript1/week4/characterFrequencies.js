@@ -10,7 +10,7 @@ const getCharacterFrequencies = (str) => {
 
   for (const char of characterArray) {
     for (let i = 0; i < characterArray.length; i++) {
-      if (characterArray[i].match(char)) {
+      if (characterArray[i] === char) {
         countOfCharacters = 0;
         countOfCharacters++;
         for (let j = characterArray.length; j > 0; j--) {
@@ -22,7 +22,7 @@ const getCharacterFrequencies = (str) => {
     }
     if (countOfCharacters === 1) {
       characters.push({ character: char, count: countOfCharacters });
-    } else if (countOfCharacters > 1) {
+    } else if (countOfCharacters >= 1) {
       loopCounter++;
       if (loopCounter === 2) {
         characters.push({ character: char, count: countOfCharacters });
@@ -34,25 +34,20 @@ const getCharacterFrequencies = (str) => {
 };
 console.log(getCharacterFrequencies("happyppp"));
 
-/* correct answer
-{
-  characters: [
-    {
-      character: 'a',
-      count: 1
-    },
-    {
-      character: 'h',
-      count: 1
-    },
-    {
-      character: 'p',
-      count: 2
-    },
-    {
-      character: 'y',
-      count: 1
-    }
-  ], length: 5
-}
-*/
+// const getCharacterFrequencies = (str) => {
+//   const characterCount = {};
+//   const characterArray = str.toLowerCase().split("").sort();
+
+//   for (const char of characterArray) {
+//     characterCount[char] = (characterCount[char] || 0) + 1;
+//   }
+
+//   const characters = [];
+//   for (const char in characterCount) {
+//     characters.push({ character: char, count: characterCount[char] });
+//   }
+
+//   return characterCount;
+// };
+
+// console.log(getCharacterFrequencies("happyppp"));
