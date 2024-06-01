@@ -17,7 +17,7 @@
 const getSentimentScore = (str) => {
   const happyWordsArray = ["mega", "super", "awesome", "happy", "positive"];
   const sadWordsArray = ["boring", "hate", "negative"];
-  const wordArray = str.split(" ");
+  const wordArray = str.toLowerCase().split(" ");
   let score = 0;
 
   const positiveWord = [];
