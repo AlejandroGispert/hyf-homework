@@ -15,23 +15,31 @@ const formatCreditCardNumber = (num) => {
     let result2 = "";
     let result3 = "";
     let result4 = "";
-
+    let formatted = "";
     for (let i = 0; i < numArray.length; i++) {
       // console.log("number: " + number + " i :" + i);
-      if (i < 4) {
-        result1 += numArray[i];
-      } else if (i < 8) {
-        result2 += numArray[i];
-      } else if (i < 12) {
-        result3 += numArray[i];
-      } else if (i < 16) {
-        result4 += numArray[i];
+      // if (i < 4) {
+      //   result1 += numArray[i];
+      // } else if (i < 8) {
+      //   result2 += numArray[i];
+      // } else if (i < 12) {
+      //   result3 += numArray[i];
+      // } else if (i < 16) {
+      //   result4 += numArray[i];
+      // }
+
+      //GENIALT! solution from Mentor
+
+      if (i > 0 && i % 4 === 0) {
+        formatted += " ";
       }
+      formatted += numArray[i];
     }
 
-    const finalResult = result1 + " " + result2 + " " + result3 + " " + result4;
-    console.log(finalResult);
-    return { original: num, formatted: finalResult };
+    // const finalResult = result1 + " " + result2 + " " + result3 + " " + result4;
+    // console.log(finalResult);
+    // return { original: num, formatted: finalResult };
+    return formatted;
   }
 };
 
