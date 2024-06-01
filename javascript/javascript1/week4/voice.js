@@ -5,8 +5,8 @@ import Artyom from "artyom.js";
 // const artyom = require("artyom.js");
 const artyom = new Artyom();
 
-let catchedName = "";
-const catchedToDo = [];
+let capturedName = "";
+const capturedToDo = [];
 const eightBallAnswers = [
   "It is certain",
   "It is decidedly so",
@@ -36,27 +36,27 @@ const getReply = (command) => {
   let response = "";
 
   if (command.toLowerCase().includes("my name is")) {
-    if (catchedName === "") {
+    if (capturedName === "") {
       for (let i = 0; i < splittedArray.length; i++) {
         if (
           splittedArray[i] === "my" &&
           splittedArray[i + 1] === "name" &&
           splittedArray[i + 2] === "is"
         ) {
-          catchedName = splittedArray[i + 3];
-          response = `Lovely to meet you ${catchedName}`;
+          capturedName = splittedArray[i + 3];
+          response = `Lovely to meet you ${capturedName}`;
         }
       }
-    } else if (catchedName != "") {
-      response = "You already told me your name " + catchedName;
+    } else if (capturedName !== "") {
+      response = "You already told me your name " + capturedName;
     }
   }
   //case 2
   else if (command.toLowerCase().includes("what is my name")) {
-    if (catchedName == "") {
+    if (capturedName === "") {
       response = "I don't know sweety";
     } else {
-      response = `I believe your name is ${catchedName}`;
+      response = `I believe your name is ${capturedName}`;
     }
   }
   //case 3
@@ -66,8 +66,8 @@ const getReply = (command) => {
   ) {
     for (let i = 0; i < splittedArray.length; i++) {
       if (splittedArray[i].toLowerCase() === "add") {
-        if (!catchedToDo.includes(splittedArray[i + 1])) {
-          catchedToDo.push(splittedArray[i + 1]);
+        if (!capturedToDo.includes(splittedArray[i + 1])) {
+          capturedToDo.push(splittedArray[i + 1]);
           response += `Added ${splittedArray[i + 1]} to our to-do list\n`;
         } else {
           response = `That item is already in our to-do list`;
@@ -83,14 +83,14 @@ const getReply = (command) => {
   ) {
     for (let i = 0; i < splittedArray.length; i++) {
       if (splittedArray[i].toLowerCase() === "remove") {
-        if (!catchedToDo.includes(splittedArray[i + 1])) {
+        if (!capturedToDo.includes(splittedArray[i + 1])) {
           response = `Item ${splittedArray[i + 1]} is not in our to-do list`;
         } else {
-          console.log(catchedToDo);
-          let indexToRemove = catchedToDo.indexOf(splittedArray[i + 1]);
-          catchedToDo.splice(indexToRemove, 1);
+          console.log(capturedToDo);
+          let indexToRemove = capturedToDo.indexOf(splittedArray[i + 1]);
+          capturedToDo.splice(indexToRemove, 1);
           response += `Removed ${splittedArray[i + 1]} from our to-do list\n`;
-          console.log(catchedToDo);
+          console.log(capturedToDo);
         }
       }
     }
@@ -104,7 +104,7 @@ const getReply = (command) => {
       command.toLowerCase().includes("to-do"))
   ) {
     response += `these are the items on our to-do list: \n`;
-    catchedToDo.map((e) => (response += `${e}\n`));
+    capturedToDo.map((e) => (response += `${e}\n`));
   }
 
   //case 6 wht day is today
@@ -229,11 +229,17 @@ if (isgetReplyAvailable()) {
     command = "";
     timeoutId = setTimeout(() => {
       clearInterval(setIntervalTimer);
-      const response = getReply(command);
-      console.log(response);
-      artyom.say(response);
+      try {
+        const response = getReply(command);
+        console.log(response);
+        artyom.say(response);
 
-      button.innerHTML = "Give a new command";
+        button.innerHTML = "Give a new command";
+      } catch (error) {
+        console.error("An error occurred:", error);
+        // Optionally handle the error, e.g., display a message to the user
+        button.innerHTML = "An error occurred. Please try again.";
+      }
     }, 5000);
   });
 
