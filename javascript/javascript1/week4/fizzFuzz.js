@@ -11,16 +11,17 @@
 
 const fizzBuzz = (num, num2) => {
   let result = "";
-  for (let i = 0; i <= 100; i++) {
-    if (i % num !== 0) {
-      result += "\n" + i;
-    } else if (i % num === 0) {
-      result += "\nFizz";
-    }
+  for (let i = 1; i <= 100; i++) {
     if (i % num === 0 && i % num2 === 0) {
-      result += "Buzz";
+      result += "FizzBuzz\n";
+    } else if (i % num === 0) {
+      result += "Fizz\n";
+    } else if (i % num2 === 0) {
+      result += "Buzz\n";
+    } else {
+      result += i + "\n";
     }
   }
   return result;
 };
-console.log(fizzBuzz(4, 12));
+console.log(fizzBuzz(3, 5));
