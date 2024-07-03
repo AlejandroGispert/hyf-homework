@@ -44,6 +44,7 @@ const getRenderedGame = (position) => {
       winner = secondRow[0];
       break;
     case thirdRow == "xxx" || thirdRow == "ooo":
+      winner = thirdRow[0];
       break;
     case firstColumn == "xxx" || firstColumn == "ooo":
       winner = firstColumn[0];
@@ -66,7 +67,8 @@ const getRenderedGame = (position) => {
   let finalResult = {
     winner: winner,
     loser: winner === undefined ? undefined : winner === "x" ? "o" : "x",
-    hasEnded: winner != undefined ? true : false,
+    hasEnded: !winner,
+    //hasEnded: winner != undefined ? true : false,
   };
   return finalResult;
 };
