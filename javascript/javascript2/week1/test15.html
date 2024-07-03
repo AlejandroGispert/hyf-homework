@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatGPT Prompt</title>
+  </head>
+  <body>
+    <h1>Ask ChatGPT</h1>
+    <form id="chatForm">
+      <label for="userInput">Enter your question:</label>
+      <input type="text" id="userInput" name="userInput" required />
+      <button type="submit">Submit</button>
+    </form>
+    <div id="response"></div>
+
+    <script>
+      document
+        .getElementById("chatForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const userInput = document.getElementById("userInput").value;
+          const responseDiv = document.getElementById("response");
+          responseDiv.innerText = "Loading...";
+
+          const headers = {
+            "Content-Type": "application/json",
+            //  Authorization: `Bearer ${apiKey}`,
+            "OpenAI-Organization": "org-HqVA4E9x1mggHEq8ZUM3j4Ht",
+            "OpenAI-Project": "Default project",
+          };
+
+          const body = {
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: userInput }],
+            temperature: 0.7,
+          };
+
+          try {
+            const response = await fetch(apiUrl, {
+              method: "POST",
+              headers: headers,
+              body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            if (data.error) {
+              throw new Error(data.error.message);
+            }
+
+            const assistantMessage = data.choices[0].message.content;
+            responseDiv.innerText = assistantMessage;
+          } catch (error) {
+            console.error("Error:", error);
+            responseDiv.innerText = "An error occurred: " + error.message;
+          }
+        });
+    </script>
+  </body>
+</html>
