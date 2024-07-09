@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blue Boxes Grid</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>Pokemon Search</h1>
+
+    <div class="search-container">
+      <input id="search-input" required />
+
+      <button id="search-button">Search</button>
+    </div>
+    <div class="backdrop">
+      <div class="screen-container" id="screen">
+        <h4 id="pokemon-name"></h4>
+        <h4 id="pokemon-id"></h4>
+        <h4 id="weight"></h4>
+        <h4 id="height"></h4>
+
+        <div id="types"></div>
+      </div>
+      <div class="grid-container">
+        <div class="grid-item noValue"><strong>BASE</strong></div>
+        <div class="grid-item noValue"><strong>STATS</strong></div>
+        <div class="grid-item">hp</div>
+        <div class="grid-item" id="hp"></div>
+        <div class="grid-item">attack</div>
+        <div class="grid-item" id="attack"></div>
+        <div class="grid-item">defense</div>
+        <div class="grid-item" id="defense"></div>
+        <div class="grid-item">special-attack</div>
+        <div class="grid-item" id="special-attack"></div>
+        <div class="grid-item">special-defense</div>
+        <div class="grid-item" id="special-defense"></div>
+        <div class="grid-item">speed</div>
+        <div class="grid-item" id="speed"></div>
+      </div>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>

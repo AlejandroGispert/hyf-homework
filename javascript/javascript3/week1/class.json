@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Bulbasaur",
+    "url": "https://pokeapi.co/api/v2/pokemon/1/"
+  },
+  {
+    "id": 2,
+    "name": "Ivysaur",
+    "url": "https://pokeapi.co/api/v2/pokemon/2/"
+  }
+]

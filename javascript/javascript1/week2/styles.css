@@ -1,0 +1,59 @@
+body {
+  background-color: #012e40;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  margin: 40px;
+}
+
+.screen-container {
+  height: 50%;
+  width: 90%;
+  margin: 5px auto;
+  background-color: #fffeff;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+#search-input {
+  background-color: e6f6fd;
+}
+.grid-container {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-item {
+  background-color: #02a9ea;
+  height: 50px;
+  width: 160px;
+  margin: 5px auto;
+  padding: 10px;
+  box-sizing: border-box;
+  color: faff00;
+  border-radius: 2px;
+}
+
+.backdrop {
+  background-color: #81d4f5;
+  padding: 1px;
+  margin: 5px auto;
+  border-radius: 6px;
+  max-width: 500px;
+  min-width: 100px;
+}
+
+.search-container {
+  text-align: center;
+  margin: 30px;
+}
+
+.noValue {
+  background-color: #015575;
+}
