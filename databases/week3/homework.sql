@@ -1,6 +1,6 @@
 -- Active: 1719747071894@@127.0.0.1@3306@mealDatabase
 
-
+-- homework done
 -- Get all meals
 SELECT * FROM `Meal`
 
