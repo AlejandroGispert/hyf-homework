@@ -1,6 +1,64 @@
 -- Active: 1719747071894@@127.0.0.1@3306@mealDatabase
 
+-- to create tables
 
+
+-- Active: 1719747071894@@127.0.0.1@3306@mealDatabase
+
+CREATE TABLE `Meal` (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(255) NOT NULL,
+  `description` TEXT ,
+  `location` VARCHAR(255) NOT NULL,
+  `when` DATETIME,
+  `max_reservations` INT(10) UNSIGNED NULL,
+  `price` DECIMAL,
+  `created_date` DATE,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `Reservation` (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `number_of_guests` INT(10) UNSIGNED NOT NULL,
+  `meal_id` INT(10) UNSIGNED NOT NULL,
+  `created_date` DATE,
+  `contact_phonenumber`  VARCHAR(255) NOT NULL,
+  `contact_name` VARCHAR(255) NOT NULL,
+  `contact_email` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  Foreign Key (`meal_id`) REFERENCES `Meal`(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+
+
+CREATE TABLE `Review` (
+`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+`title` VARCHAR(255) NOT NULL,
+`description` TEXT,
+`meal_id` INT(10) UNSIGNED NOT NULL,
+`stars` INT(10) UNSIGNED NOT NULL,
+ `created_date` DATE,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`meal_id`) REFERENCES `Meal`(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO `Meal` (title, description,location,max_reservations,price,created_date) VALUES ('Pizza', 'Italian', 'Copenhagen',5,79,'2024-03-15 14:30:00'),('Hamburger', 'German', 'Copenhagen',6,89,'2024-03-15 14:30:00');
+
+INSERT INTO `Reservation` (number_of_guests, meal_id,contact_phonenumber,contact_name,contact_email) VALUES (5, 2, 424428222,'pedro searez','pedrosearez@gmail.com'),(50, 1, 442228222,'tormenta vieja','tormenta@gmail.com');
+
+INSERT INTO `Review` (title, description, meal_id,stars) VALUES ('Buenisimo', 'Italiano perfecctisima la mama del la comida', 1,5),('thunder', 'the food was stormy', 2,3)
+
+
+
+-----------
+
+
+
+-- homework done
 -- Get all meals
 SELECT * FROM `Meal`
 
