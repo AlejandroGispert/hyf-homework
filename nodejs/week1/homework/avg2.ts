@@ -1,4 +1,4 @@
-const args: string[] | boolean = process.argv.slice(2);
+const args: string[] = process.argv.slice(2);
 
 if (args.length === 0) {
   console.log("No numbers provided. Insert a number please.");
