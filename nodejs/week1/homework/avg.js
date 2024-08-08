@@ -1,13 +1,8 @@
-// "use strict";
-
-// this works  node avg.js -i 2  -n 4
-// const args = require("minimist")(process.argv.slice(2));
-
-// console.log(parseInt(args.i) + parseInt(args.n));
-
 const args = process.argv.slice(2);
 for (let i = 0; i < args.length; i++) {
-  if (typeof args[i] === "string") {
+  const num = Number(args[i]);
+
+  if (isNaN(num)) {
     console.log(`Invalid input: ${args[i]}`);
     process.exit(1);
   }
