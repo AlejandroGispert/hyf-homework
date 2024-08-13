@@ -46,6 +46,64 @@ app.get("/documents/:id", (req, res) => {
   }
 });
 
+app.post("/search", (req, res) => {
+  const searchTermQuery = req.query.q;
+  const searchTermField = req.query.fields;
+
+  if (searchTermQuery && searchTermField) {
+    return res.status(400).send("Bad Request, both queries can't be provided");
+  }
+
+  if (searchTermField) {
+    function findFields() {
+      for (let i = 0; i < jsonFile.length; i++) {
+        const item = jsonFile[i];
+        const keys = Object.keys(item);
+
+        for (let j = 0; j < keys.length; j++) {
+          const key = keys[j];
+          console.log(key);
+          const value = item[key];
+          //   console.log(item[key]);
+          if (typeof key === "string" && key === searchTermField) {
+            return { fields: { [key]: value } };
+          }
+        }
+      }
+      return;
+    }
+
+    const fieldResult = findFields();
+    return res.send(fieldResult);
+    if (fieldResult) {
+      console.log(fieldResult);
+      return res.send(fieldResult);
+    } else {
+      return res.status(404).send("No matches found for the specified field");
+    }
+  }
+
+  if (searchTermQuery) {
+    const result = jsonFile.filter((item) =>
+      Object.values(item).some(
+        (value) =>
+          typeof value === "string" &&
+          value.toLowerCase().includes(searchTermQuery.toLowerCase())
+      )
+    );
+
+    if (result.length > 0) {
+      console.log(JSON.stringify(result));
+      return res.send(result);
+    } else {
+      return res.status(404).send("No matches found for the specified query");
+    }
+  }
+
+  // If neither searchTermField nor searchTermQuery is provided, return the full JSON file
+  res.send(jsonFile);
+});
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
