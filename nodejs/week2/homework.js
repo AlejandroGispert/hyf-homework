@@ -31,10 +31,12 @@ app.get("/documents/:id", (req, res) => {
 
   function findId() {
     for (let i = 0; i < jsonFile.length; i++) {
-      if (jsonFile[i].id === id) {
-        return jsonFile[i];
-      } else {
-        continue;
+      const item = jsonFile[i];
+      const keys = Object.keys(item);
+
+      if (item.id.toString() === id) {
+        console.log(item);
+        return item;
       }
     }
   }
