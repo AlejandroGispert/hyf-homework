@@ -21,6 +21,14 @@ app.get("/add/:number1/:number2", (req, res) => {
   console.log(req.params.number1);
 });
 
+app.get("/add", (req, res) => {
+  // res.send("Result = " + req.query);
+
+  const result = Object.values(req.query).map((e) => Number(e) + 10);
+  console.log("result: ", result);
+
+  res.send("Result = " + result.toString());
+});
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
