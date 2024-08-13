@@ -26,6 +26,26 @@ app.get("/search", (req, res) => {
   }
 });
 
+app.get("/documents/:id", (req, res) => {
+  const id = req.params.id;
+
+  function findId() {
+    for (let i = 0; i < jsonFile.length; i++) {
+      if (jsonFile[i].id === id) {
+        return jsonFile[i];
+      } else {
+        continue;
+      }
+    }
+  }
+  const note = findId();
+  if (note) {
+    res.send(note);
+  } else {
+    res.status(404).send("Not found");
+  }
+});
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
