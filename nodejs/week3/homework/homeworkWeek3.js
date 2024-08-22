@@ -27,15 +27,14 @@ apiRouter.use("/contacts", contactsAPIRouter);
 contactsAPIRouter.get("/", async (req, res) => {
   let query = knexInstance.select("*").from("contacts");
 
-  const sanitizedOrderBy = knexInstance.raw("??", [orderBy]); // Escaping identifiers query = query.orderByRaw(sanitizedOrderBy);
-
   const allowedSortFields = ["first_name", "email", "phone"];
 
   if ("sort" in req.query) {
     const orderBy = req.query.sort.toString();
-    if (/^[a-zA-Z_]+$/.test(orderBy) && allowedSortFields.includes(orderBy)) {
-      query = query.orderBy(sanitizedOrderBy);
-    }
+    const sanitizedOrderBy = knexInstance.raw("??", [orderBy]);
+    // if (/^[a-zA-Z_]+$/.test(orderBy) && allowedSortFields.includes(orderBy)) {
+    query = query.orderByRaw(sanitizedOrderBy);
+    // }
   }
 
   console.log("SQL", query.toSQL().sql);
