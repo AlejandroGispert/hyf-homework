@@ -32,7 +32,7 @@ contactsAPIRouter.get("/", async (req, res) => {
   if ("sort" in req.query) {
     const orderBy = req.query.sort.toString();
     const sanitizedOrderBy = knexInstance.raw("??", [orderBy]);
-    // if (/^[a-zA-Z_]+$/.test(orderBy) && allowedSortFields.includes(orderBy)) {
+    // if (/^[a-zA-Z_]+$/.test(orderBy) && allowedSogit clonertFields.includes(orderBy)) {
     query = query.orderByRaw(sanitizedOrderBy);
     // }
   }
