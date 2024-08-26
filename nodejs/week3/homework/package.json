@@ -1,0 +1,19 @@
+{
+  "name": "homework",
+  "version": "1.0.0",
+  "main": "homeworkWeek3.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch homeworkWeek3.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "knex": "^3.1.0",
+    "mysql2": "^3.11.0"
+  }
+}
