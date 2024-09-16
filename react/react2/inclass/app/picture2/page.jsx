@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+gi;
 import Image from "next/image";
 // Exercise 2
 
